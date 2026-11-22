@@ -1,0 +1,40 @@
+name: Terraform CI
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  terraform-checks:
+    name: Terraform Format and Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive -diff
+
+      - name: Terraform Init and Validate
+        shell: bash
+        run: |
+          while IFS= read -r dir; do
+            echo "Validating Terraform in: $dir"
+            terraform -chdir="$dir" init -backend=false -input=false -no-color
+            terraform -chdir="$dir" validate -no-color
+          done < <(
+            find . -type f -name '*.tf' \
+              -not -path '*/.terraform/*' \
+              -printf '%h\n' | sort -u
+          )

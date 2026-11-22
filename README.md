@@ -1,3 +1,5 @@
+[![Terraform CI](https://github.com/Shreeyansh-verma/accenture-aws-capstone/actions/workflows/terraform-ci.yml/badge.svg?branch=main)](https://github.com/Shreeyansh-verma/accenture-aws-capstone/actions/workflows/terraform-ci.yml)
+
 
 # Project 1: Linux EC2 Web Server using Terraform
 
