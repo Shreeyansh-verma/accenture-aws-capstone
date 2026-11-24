@@ -1,0 +1,14 @@
+=== Project 23 IAM Role Test ===
+=== EC2 IAM Identity ===
+{
+    "UserId": "AROAYS7HXD5CRVIY7S67D:i-077eff2699a630f96",
+    "Account": "590507089733",
+    "Arn": "arn:aws:sts::590507089733:assumed-role/shreeyansh-p23-ec2-s3-role/i-077eff2699a630f96"
+}
+=== S3 Bucket Access ===
+2026-11-24 12:28:06        258 project17-app.log
+=== Download Archived Log ===
+=== Downloaded File Size ===
+258 /tmp/project23-app.log
+=== PROJECT 23 TEST PASSED ===
+

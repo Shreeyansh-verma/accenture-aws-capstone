@@ -1,0 +1,31 @@
+{
+    "InstanceProfile": {
+        "Path": "/",
+        "InstanceProfileName": "shreeyansh-p23-ec2-s3-profile",
+        "InstanceProfileId": "AIPAYS7HXD5CTKVWP3DHA",
+        "Arn": "arn:aws:iam::590507089733:instance-profile/shreeyansh-p23-ec2-s3-profile",
+        "CreateDate": "2026-11-24T14:34:07+00:00",
+        "Roles": [
+            {
+                "Path": "/",
+                "RoleName": "shreeyansh-p23-ec2-s3-role",
+                "RoleId": "AROAYS7HXD5CRVIY7S67D",
+                "Arn": "arn:aws:iam::590507089733:role/shreeyansh-p23-ec2-s3-role",
+                "CreateDate": "2026-11-24T14:33:47+00:00",
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "ec2.amazonaws.com"
+                            },
+                            "Action": "sts:AssumeRole"
+                        }
+                    ]
+                }
+            }
+        ],
+        "Tags": []
+    }
+}

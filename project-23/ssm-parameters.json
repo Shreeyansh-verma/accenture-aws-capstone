@@ -1,0 +1,15 @@
+{
+  "commands": [
+    "set -eu",
+    "echo '=== Project 23 IAM Role Test ==='",
+    "echo '=== EC2 IAM Identity ==='",
+    "aws sts get-caller-identity --region ap-south-1",
+    "echo '=== S3 Bucket Access ==='",
+    "aws s3 ls s3://shreeyansh-p22-archive-590507089733-20261124121500/logs/ --region ap-south-1",
+    "echo '=== Download Archived Log ==='",
+    "aws s3 cp s3://shreeyansh-p22-archive-590507089733-20261124121500/logs/project17-app.log /tmp/project23-app.log --region ap-south-1 --only-show-errors",
+    "echo '=== Downloaded File Size ==='",
+    "wc -c /tmp/project23-app.log",
+    "echo '=== PROJECT 23 TEST PASSED ==='"
+  ]
+}
