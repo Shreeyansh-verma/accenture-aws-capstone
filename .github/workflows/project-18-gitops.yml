@@ -2,8 +2,7 @@
 name: Project 18 - GitOps Terraform Deployment
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches: [main]
     paths:
       - 'project-18/**'
@@ -11,11 +10,12 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
+  pull-requests: read
 
 jobs:
   terraform-plan:
     name: Terraform Plan
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     defaults:
@@ -23,6 +23,14 @@ jobs:
         working-directory: project-18
 
     steps:
+      - name: Verify merged pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls" \
+            --jq 'any(.[]; .merged_at != null and .base.ref == "main")' \
+            | grep -qx true
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
