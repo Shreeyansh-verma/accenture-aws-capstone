@@ -1,0 +1,6 @@
+{
+    "Status": "Success",
+    "ResponseCode": 0,
+    "Output": "=== Project 23 IAM Role Test ===\n=== EC2 IAM Identity ===\n{\n    \"UserId\": \"AROAYS7HXD5CRVIY7S67D:i-077eff2699a630f96\",\n    \"Account\": \"590507089733\",\n    \"Arn\": \"arn:aws:sts::590507089733:assumed-role/shreeyansh-p23-ec2-s3-role/i-077eff2699a630f96\"\n}\n=== S3 Bucket Access ===\n2026-11-24 12:28:06        258 project17-app.log\n=== Download Archived Log ===\n=== Downloaded File Size ===\n258 /tmp/project23-app.log\n=== PROJECT 23 TEST PASSED ===\n",
+    "Errors": ""
+}
