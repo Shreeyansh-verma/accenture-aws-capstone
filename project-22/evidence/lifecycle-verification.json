@@ -1,0 +1,15 @@
+{
+    "TransitionDefaultMinimumObjectSize": "all_storage_classes_128K",
+    "Rules": [
+        {
+            "Expiration": {
+                "Days": 30
+            },
+            "ID": "expire-project22-logs-30-days",
+            "Filter": {
+                "Prefix": "logs/"
+            },
+            "Status": "Enabled"
+        }
+    ]
+}
