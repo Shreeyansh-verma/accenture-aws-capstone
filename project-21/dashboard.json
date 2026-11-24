@@ -1,0 +1,150 @@
+{
+  "widgets": [
+    {
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 24,
+      "height": 2,
+      "properties": {
+        "markdown": "# Project 21 - CloudWatch Monitoring\nMonitoring Project 20 EC2 instances and Application Load Balancer."
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 2,
+      "width": 12,
+      "height": 7,
+      "properties": {
+        "title": "EC2 CPU Utilization (%)",
+        "metrics": [
+          [
+            "AWS/EC2",
+            "CPUUtilization",
+            "InstanceId",
+            "i-0fc30c4b1c384ebc6",
+            {
+              "label": "EC2 Server 1"
+            }
+          ],
+          [
+            "AWS/EC2",
+            "CPUUtilization",
+            "InstanceId",
+            "i-00cd9207bcc7c0be5",
+            {
+              "label": "EC2 Server 2"
+            }
+          ]
+        ],
+        "region": "ap-south-1",
+        "view": "timeSeries",
+        "stacked": false,
+        "stat": "Average",
+        "period": 300
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 2,
+      "width": 12,
+      "height": 7,
+      "properties": {
+        "title": "EC2 Network Traffic (Bytes)",
+        "metrics": [
+          [
+            "AWS/EC2",
+            "NetworkIn",
+            "InstanceId",
+            "i-0fc30c4b1c384ebc6",
+            {
+              "label": "Server 1 - NetworkIn"
+            }
+          ],
+          [
+            "AWS/EC2",
+            "NetworkOut",
+            "InstanceId",
+            "i-0fc30c4b1c384ebc6",
+            {
+              "label": "Server 1 - NetworkOut"
+            }
+          ],
+          [
+            "AWS/EC2",
+            "NetworkIn",
+            "InstanceId",
+            "i-00cd9207bcc7c0be5",
+            {
+              "label": "Server 2 - NetworkIn"
+            }
+          ],
+          [
+            "AWS/EC2",
+            "NetworkOut",
+            "InstanceId",
+            "i-00cd9207bcc7c0be5",
+            {
+              "label": "Server 2 - NetworkOut"
+            }
+          ]
+        ],
+        "region": "ap-south-1",
+        "view": "timeSeries",
+        "stacked": false,
+        "stat": "Sum",
+        "period": 300
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 9,
+      "width": 12,
+      "height": 7,
+      "properties": {
+        "title": "ALB Healthy Targets",
+        "metrics": [
+          [
+            "AWS/ApplicationELB",
+            "HealthyHostCount",
+            "TargetGroup",
+            "targetgroup/shreeyansh-p20-tg/bef53a0fe3ead7cd",
+            "LoadBalancer",
+            "app/shreeyansh-p20-alb/b59434452e213c26"
+          ]
+        ],
+        "region": "ap-south-1",
+        "view": "timeSeries",
+        "stacked": false,
+        "stat": "Average",
+        "period": 60
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 9,
+      "width": 12,
+      "height": 7,
+      "properties": {
+        "title": "ALB HTTP Request Count",
+        "metrics": [
+          [
+            "AWS/ApplicationELB",
+            "RequestCount",
+            "LoadBalancer",
+            "app/shreeyansh-p20-alb/b59434452e213c26"
+          ]
+        ],
+        "region": "ap-south-1",
+        "view": "timeSeries",
+        "stacked": false,
+        "stat": "Sum",
+        "period": 60
+      }
+    }
+  ]
+}
