@@ -1,0 +1,88 @@
+
+name: Project 18 - GitOps Terraform Deployment
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+    paths:
+      - 'project-18/**'
+      - '.github/workflows/project-18-gitops.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  terraform-plan:
+    name: Terraform Plan
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: project-18
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.9.8'
+
+      - name: Terraform Init
+        run: terraform init -backend=false -input=false
+
+      - name: Terraform Format
+        run: terraform fmt -check
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan -input=false -no-color
+
+      - name: Upload Terraform Plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: project-18-plan
+          path: project-18/tfplan
+          retention-days: 1
+          if-no-files-found: error
+
+  terraform-apply:
+    name: Terraform Apply - Approval Required
+    needs: terraform-plan
+    runs-on: ubuntu-latest
+
+    environment:
+      name: capstone-p18-approval
+
+    defaults:
+      run:
+        working-directory: project-18
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.9.8'
+
+      - name: Download Terraform Plan
+        uses: actions/download-artifact@v4
+        with:
+          name: project-18-plan
+          path: project-18
+
+      - name: Terraform Init
+        run: terraform init -backend=false -input=false
+
+      - name: Terraform Apply
+        run: terraform apply -input=false -no-color tfplan
+
+      - name: Verify Deployment
+        run: terraform output -raw deployment_status
