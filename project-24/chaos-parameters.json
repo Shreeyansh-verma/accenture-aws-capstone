@@ -1,0 +1,21 @@
+{
+  "commands": [
+    "set -eu",
+    "trap 'systemctl start project24-demo.service >/dev/null 2>&1 || true' EXIT",
+    "echo '=== BEFORE FAILURE ==='",
+    "date -u '+%Y-%m-%dT%H:%M:%SZ'",
+    "systemctl is-active project24-demo.service",
+    "curl --fail --silent --show-error --retry 5 --retry-delay 1 --retry-connrefused http://127.0.0.1:8765/",
+    "echo '=== INJECTING FAILURE ==='",
+    "systemctl stop project24-demo.service",
+    "date -u '+%Y-%m-%dT%H:%M:%SZ'",
+    "if systemctl is-active --quiet project24-demo.service; then echo 'ERROR: service still active'; exit 1; else echo 'Service inactive as expected'; fi",
+    "if curl --fail --silent --max-time 3 http://127.0.0.1:8765/ >/dev/null 2>&1; then echo 'ERROR: HTTP still reachable'; exit 1; else echo 'HTTP unavailable as expected'; fi",
+    "echo '=== RESTORING SERVICE ==='",
+    "systemctl start project24-demo.service",
+    "date -u '+%Y-%m-%dT%H:%M:%SZ'",
+    "systemctl is-active project24-demo.service",
+    "curl --fail --silent --show-error --retry 5 --retry-delay 1 --retry-connrefused http://127.0.0.1:8765/",
+    "echo '=== PROJECT 24 CHAOS TEST PASSED ==='"
+  ]
+}

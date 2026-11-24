@@ -1,0 +1,22 @@
+{
+    "CommandId": "7494de82-282a-4acc-9957-3802ad41370f",
+    "InstanceId": "i-077eff2699a630f96",
+    "Comment": "Project 24 controlled failure and recovery",
+    "DocumentName": "AWS-RunShellScript",
+    "DocumentVersion": "$DEFAULT",
+    "PluginName": "aws:runShellScript",
+    "ResponseCode": 0,
+    "ExecutionStartDateTime": "2026-11-24T16:47:37.235Z",
+    "ExecutionElapsedTime": "PT1.093S",
+    "ExecutionEndDateTime": "2026-11-24T16:47:38.235Z",
+    "Status": "Success",
+    "StatusDetails": "Success",
+    "StandardOutputContent": "=== BEFORE FAILURE ===\n2026-11-24T16:47:37Z\nactive\nProject 24 service healthy\n=== INJECTING FAILURE ===\n2026-11-24T16:47:37Z\nService inactive as expected\nHTTP unavailable as expected\n=== RESTORING SERVICE ===\n2026-11-24T16:47:37Z\nactive\nProject 24 service healthy\n=== PROJECT 24 CHAOS TEST PASSED ===\n",
+    "StandardOutputUrl": "",
+    "StandardErrorContent": "curl: (7) Failed to connect to 127.0.0.1:8765 after 0 ms: Could not connect to server\n",
+    "StandardErrorUrl": "",
+    "CloudWatchOutputConfig": {
+        "CloudWatchLogGroupName": "",
+        "CloudWatchOutputEnabled": false
+    }
+}

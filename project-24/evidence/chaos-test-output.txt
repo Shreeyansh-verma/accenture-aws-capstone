@@ -1,0 +1,14 @@
+=== BEFORE FAILURE ===
+2026-11-24T16:47:37Z
+active
+Project 24 service healthy
+=== INJECTING FAILURE ===
+2026-11-24T16:47:37Z
+Service inactive as expected
+HTTP unavailable as expected
+=== RESTORING SERVICE ===
+2026-11-24T16:47:37Z
+active
+Project 24 service healthy
+=== PROJECT 24 CHAOS TEST PASSED ===
+
