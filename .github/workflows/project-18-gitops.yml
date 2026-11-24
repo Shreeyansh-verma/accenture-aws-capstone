@@ -23,6 +23,7 @@ jobs:
 
     steps:
       - name: Verify merged pull request
+        working-directory: .
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
