@@ -1,0 +1,4 @@
+inventory.ini
+docker-target/authorized_keys
+*.pem
+*.key
