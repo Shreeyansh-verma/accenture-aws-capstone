@@ -1,0 +1,14 @@
+{
+  "commands": [
+    "set -eu",
+    "command -v python3",
+    "mkdir -p /opt/project24-demo",
+    "echo 'Project 24 service healthy' > /opt/project24-demo/index.html",
+    "printf '%s\\n' '[Unit]' 'Description=Project 24 isolated chaos test' '[Service]' 'Type=simple' 'ExecStart=/usr/bin/python3 -m http.server 8765 --bind 127.0.0.1 --directory /opt/project24-demo' 'Restart=no' '[Install]' 'WantedBy=multi-user.target' > /etc/systemd/system/project24-demo.service",
+    "systemctl daemon-reload",
+    "systemctl enable --now project24-demo.service",
+    "echo '=== BEFORE FAILURE ==='",
+    "systemctl is-active project24-demo.service",
+    "curl --fail --silent --show-error --retry 5 --retry-delay 1 --retry-connrefused http://127.0.0.1:8765/"
+  ]
+}
