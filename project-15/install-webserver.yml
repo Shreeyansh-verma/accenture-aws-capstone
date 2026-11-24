@@ -1,0 +1,57 @@
+
+---
+- name: Project 15 - Automate Nginx Web Server Configuration
+  hosts: webservers
+  become: true
+
+  tasks:
+    - name: Install Nginx web server
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+        update_cache: true
+
+    - name: Create Project 15 webpage
+      ansible.builtin.copy:
+        dest: /var/www/html/index.html
+        mode: "0644"
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Accenture Capstone Project 15</title>
+          </head>
+          <body style="font-family:Arial;text-align:center;padding:80px;">
+              <h1>Accenture Capstone - Project 15</h1>
+              <h2>Ansible Web Server Automation</h2>
+              <p>Nginx installed and configured successfully using Ansible!</p>
+          </body>
+          </html>
+      register: webpage
+
+    - name: Check whether Nginx is running
+      ansible.builtin.command: pgrep -x nginx
+      register: nginx_process
+      failed_when: false
+      changed_when: false
+
+    - name: Start Nginx if stopped
+      ansible.builtin.command: /usr/sbin/nginx
+      when: nginx_process.rc != 0
+
+    - name: Reload Nginx if webpage was updated
+      ansible.builtin.command: /usr/sbin/nginx -s reload
+      when:
+        - nginx_process.rc == 0
+        - webpage.changed
+
+    - name: Verify web server responds successfully
+      ansible.builtin.uri:
+        url: http://127.0.0.1/
+        status_code: 200
+        return_content: true
+      register: web_response
+
+    - name: Display verification result
+      ansible.builtin.debug:
+        msg: "Project 15 Nginx is working. HTTP status: {{ web_response.status }}"
